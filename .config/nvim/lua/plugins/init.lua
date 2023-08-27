@@ -338,15 +338,15 @@ local default_plugins = {
   -- },
 
 -- sidebar
-  {
-    "sidebar-nvim/sidebar.nvim",
-    keys = {
-      { "<leader>sb", "<cmd>SidebarNvimToggle<cr>", desc = "Toggle Sidebar" },
-    },
-    config = function(_, opts)
-      require("sidebar-nvim").setup(opts)
-    end,
-  },
+  -- {
+  --   "sidebar-nvim/sidebar.nvim",
+  --   keys = {
+  --     { "<leader>sb", "<cmd>SidebarNvimToggle<cr>", desc = "Toggle Sidebar" },
+  --   },
+  --   config = function(_, opts)
+  --     require("sidebar-nvim").setup(opts)
+  --   end,
+  -- },
 
 --  {
 --    "feline-nvim/feline.nvim",
@@ -370,10 +370,10 @@ local default_plugins = {
     config = true
   },
 
-  {
-    "sakhnik/nvim-gdb",
-    config = true,
-  },
+  -- {
+  --   "sakhnik/nvim-gdb",
+  --   config = true,
+  -- },
 
   {
     "nmac427/guess-indent.nvim",
@@ -503,10 +503,24 @@ local default_plugins = {
     },
   },
 
+  {
+    'rcarriga/nvim-notify',
+    config = function(_, opts)
+      vim.notify = require("notify")
+    end,
+    event = "VeryLazy",
+  },
+
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    event = "VeryLazy",
+  },
+
   -- Only load whichkey after all the gui
   {
     "folke/which-key.nvim",
-    keys = { "<leader>", '"', "'", "`", "c", "v", "g" },
+    keys = { "<leader>", '"', "'", "`", "c", "v", "g", "[", "]", "z" },
     -- init = function()
       -- require("core.utils").load_mappings "whichkey"
     -- end,
