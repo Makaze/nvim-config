@@ -87,17 +87,17 @@ local default_plugins = {
     end,
   },
 
-  {
-    'nvim-treesitter/nvim-treesitter-context',
-    config = true,
-    event = "VeryLazy",
-  },
+  -- {
+  --   'nvim-treesitter/nvim-treesitter-context',
+  --   config = true,
+  --   event = "VeryLazy",
+  -- },
 
-  {
-    'SmiteshP/nvim-navic',
-    config = true,
-    event = "VeryLazy",
-  },
+  -- {
+  --   'SmiteshP/nvim-navic',
+  --   config = true,
+  --   event = "VeryLazy",
+  -- },
 
   -- git stuff
   {
@@ -245,7 +245,6 @@ local default_plugins = {
       "nvim-telescope/telescope-fzf-native.nvim",
       "nvim-treesitter/nvim-treesitter",
       "nvim-lua/plenary.nvim",
-      "debugloop/telescope-undo.nvim",
     },
     cmd = "Telescope",
     init = function()
@@ -263,9 +262,6 @@ local default_plugins = {
       for _, ext in ipairs(opts.extensions_list) do
         telescope.load_extension(ext)
       end
-
-      require("telescope").load_extension("undo")
-      vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
     end,
   },
 
@@ -295,17 +291,17 @@ local default_plugins = {
     event = "VeryLazy",
     config = function(_, opts)
       require('neoclip').setup({
-      default_register = '+',
-      on_select = {
-        set_reg = true,
-        move_to_front = true,
-        close_telescope = true,
-      },
-      on_paste = {
-        set_reg = true,
-        move_to_front = true,
-        close_telescope = true,
-      },
+        default_register = '+',
+        on_select = {
+          set_reg = true,
+          move_to_front = true,
+          close_telescope = true,
+        },
+        on_paste = {
+          set_reg = true,
+          move_to_front = true,
+          close_telescope = true,
+        },
       })
       require("telescope").load_extension("neoclip")
       vim.keymap.set("n", "<leader>fc", "<cmd>Telescope neoclip<cr>")
@@ -324,42 +320,6 @@ local default_plugins = {
     event = "VeryLazy",
   },
 
-  -- {
-  --   'stevearc/aerial.nvim',
-  --   opts = {},
-  --   -- Optional dependencies
-  --   dependencies = {
-  --     "nvim-treesitter/nvim-treesitter",
-  --     "nvim-tree/nvim-web-devicons"
-  --   },
-  --   keys = {
-  --     { "<leader>a", "<cmd>AerialToggle!<cr>", desc = "Toggle Aerial Bar" },
-  --   },
-  -- },
-
--- sidebar
-  -- {
-  --   "sidebar-nvim/sidebar.nvim",
-  --   keys = {
-  --     { "<leader>sb", "<cmd>SidebarNvimToggle<cr>", desc = "Toggle Sidebar" },
-  --   },
-  --   config = function(_, opts)
-  --     require("sidebar-nvim").setup(opts)
-  --   end,
-  -- },
-
---  {
---    "feline-nvim/feline.nvim",
---    init = function()
---      require("plugins.feline")
---    end,
---    config = function(_, opts)
---      --require("feline-nvim").setup()
---      require("plugins.feline") -- the location of this GIST.
---    end,
---    lazy = false,
---  },
-
   {
     "NeogitOrg/neogit",
     dependencies = {
@@ -370,15 +330,10 @@ local default_plugins = {
     config = true
   },
 
-  -- {
-  --   "sakhnik/nvim-gdb",
-  --   config = true,
-  -- },
-
   {
     "nmac427/guess-indent.nvim",
     keys = {
-      { "<leader>gi", "<cmd>GuessIndent<cr>", desc = "Toggle Sidebar" },
+      { "<leader>gi", "<cmd>GuessIndent<cr>", desc = "Guess indents" },
     },
     config = true,
     lazy = false,
@@ -411,6 +366,7 @@ local default_plugins = {
   --   config=false,
   --   lazy=false,
   -- },
+
   {
     'honza/vim-snippets',
     config=false,
@@ -496,10 +452,24 @@ local default_plugins = {
   },
 
   {
+    "smoka7/multicursors.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'smoka7/hydra.nvim',
+    },
+    opts = {},
+    cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
+    keys = {
+      { mode = { 'v', 'n' }, '<Leader>m', '<cmd>MCunderCursor<cr>', desc = 'Create a selection for selected character under the cursor', },
+    },
+  },
+
+  {
     "simrat39/symbols-outline.nvim",
     config = true,
     keys = {
-      { "<leader>ss", "<cmd>SymbolsOutline<cr>", desc = "Toggle Symboles Outline" },
+      { "<leader>ss", },
     },
   },
 
@@ -509,6 +479,18 @@ local default_plugins = {
       vim.notify = require("notify")
     end,
     event = "VeryLazy",
+  },
+
+  {
+    'debugloop/telescope-undo.nvim',
+    dependencies = {
+      'nvim-telescope/telescope.nvim',
+    },
+    config = function(_, opts)
+      require("telescope").load_extension("undo")
+    end,
+    keys = { "<leader>" },
+    cmd = { "Telescope undo" },
   },
 
   {
