@@ -461,16 +461,14 @@ local default_plugins = {
     opts = {},
     cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
     keys = {
-      { mode = { 'v', 'n' }, '<Leader>m', '<cmd>MCunderCursor<cr>', desc = 'Create a selection for selected character under the cursor', },
+      { mode = { 'v', 'n' }, '<Leader>m', '<cmd>MCunderCursor<cr>', desc = 'Create a selection for selected text or word under the cursor', },
     },
   },
 
   {
     "simrat39/symbols-outline.nvim",
     config = true,
-    keys = {
-      { "<leader>ss", },
-    },
+    cmd = { 'SymbolsOutline' },
   },
 
   {
