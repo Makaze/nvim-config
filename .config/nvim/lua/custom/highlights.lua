@@ -8,6 +8,13 @@ local M = {}
 M.override = {
   Comment = {
     italic = true,
+ },
+  -- Highlights cursor line
+  CursorLine = {
+    bg = {"black", 2},
+  },
+  Visual = {
+    bg = {"black", 4},
   },
 }
 

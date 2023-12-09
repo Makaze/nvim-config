@@ -87,11 +87,11 @@ local default_plugins = {
     end,
   },
 
-  -- {
-  --   'nvim-treesitter/nvim-treesitter-context',
-  --   config = true,
-  --   event = "VeryLazy",
-  -- },
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    config = true,
+    event = "VeryLazy",
+  },
 
   -- {
   --   'SmiteshP/nvim-navic',
@@ -160,7 +160,7 @@ local default_plugins = {
   -- load luasnips + cmp related in insert mode only
   {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    event = "VeryLazy",
     dependencies = {
       {
         -- snippet plugin
@@ -223,6 +223,17 @@ local default_plugins = {
     end,
   },
 
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+    event = "VeryLazy",
+  },
+
   -- file managing , picker etc
   {
     "nvim-tree/nvim-tree.lua",
@@ -264,6 +275,71 @@ local default_plugins = {
       end
     end,
   },
+
+  -- barbar
+  -- {
+  --   "romgrk/barbar.nvim",
+  --   dependencies = {
+  --     'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+  --     'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+  --   },
+  --   init = function() vim.g.barbar_auto_setup = false end,
+  --   opts = {
+  --     -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+  --     -- animation = true,
+  --     -- insert_at_start = true,
+  --     -- …etc.
+  --   },
+  --   config = function(_, opts)
+  --     require('barbar').setup(opts)
+  --     local map = vim.api.nvim_set_keymap
+  --     local key_opts = { noremap = true, silent = true }
+  --
+  --     -- Move to previous/next
+  --     map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', key_opts)
+  --     map('n', '<A-.>', '<Cmd>BufferNext<CR>', key_opts)
+  --     -- Re-order to previous/next
+  --     map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', key_opts)
+  --     map('n', '<A->>', '<Cmd>BufferMoveNext<CR>', key_opts)
+  --     -- Goto buffer in position...
+  --     map('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', key_opts)
+  --     map('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', key_opts)
+  --     map('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', key_opts)
+  --     map('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', key_opts)
+  --     map('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', key_opts)
+  --     map('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', key_opts)
+  --     map('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', key_opts)
+  --     map('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', key_opts)
+  --     map('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', key_opts)
+  --     map('n', '<A-0>', '<Cmd>BufferLast<CR>', key_opts)
+  --     -- Pin/unpin buffer
+  --     map('n', '<A-p>', '<Cmd>BufferPin<CR>', key_opts)
+  --     -- Close buffer
+  --     map('n', '<A-c>', '<Cmd>BufferClose<CR>', key_opts)
+  --     -- Wipeout buffer
+  --     --                 :BufferWipeout
+  --     -- Close commands
+  --     --                 :BufferCloseAllButCurrent
+  --     --                 :BufferCloseAllButPinned
+  --     --                 :BufferCloseAllButCurrentOrPinned
+  --     --                 :BufferCloseBuffersLeft
+  --     --                 :BufferCloseBuffersRight
+  --     -- Magic buffer-picking mode
+  --     map('n', '<C-p>', '<Cmd>BufferPick<CR>', key_opts)
+  --     -- Sort automatically by...
+  --     map('n', '<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>', key_opts)
+  --     map('n', '<Space>bd', '<Cmd>BufferOrderByDirectory<CR>', key_opts)
+  --     map('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>', key_opts)
+  --     map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', key_opts)
+  --
+  --     -- Other:
+  --     -- :BarbarEnable - enables barbar (enabled by default)
+  --     -- :BarbarDisable - very bad command, should never be used
+  --
+  --   end,
+  --   version = '^1.0.0', -- optional: only update when a new 1.x version is released
+  --   event = "VeryLazy",
+  -- },
 
   {
     "nvim-telescope/telescope-file-browser.nvim",
@@ -360,6 +436,18 @@ local default_plugins = {
     lazy=false,
   },
 
+  -- {
+  --   "m4xshen/hardtime.nvim",
+  --   dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+  --   opts = {
+  --     disabled_keys = {
+  --       ["<Up>"] = {"n"},
+  --       ["<>"] = {"n"},
+  --     },
+  --   },
+  --   lazy = false,
+  -- },
+
   -- Snippets
   -- {
   --   'SirVer/ultisnips',
@@ -443,11 +531,21 @@ local default_plugins = {
     opts = {},
     -- stylua: ignore
     keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "<leader>rs", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "<leader>ts", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+      { "<C-f>", mode = { "n", "x", "o" },
+        function() require("flash").jump() end, desc = "Flash"
+      },
+      { "<leader>sf", mode = { "n", "o", "x" },
+        function() require("flash").treesitter() end, desc = "Flash Treesitter"
+      },
+      { "<leader>rs", mode = "o",
+        function() require("flash").remote() end, desc = "Remote Flash"
+      },
+      { "<leader>ts", mode = { "o", "x" },
+        function() require("flash").treesitter_search() end, desc = "Treesitter Search"
+      },
+      { "<C-s>", mode = { "c" },
+        function() require("flash").toggle() end, desc = "Toggle Flash Search"
+      },
     },
   },
 
@@ -461,7 +559,9 @@ local default_plugins = {
     opts = {},
     cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
     keys = {
-      { mode = { 'v', 'n' }, '<Leader>m', '<cmd>MCunderCursor<cr>', desc = 'Create a selection for selected text or word under the cursor', },
+      { mode = { 'v', 'n' }, '<Leader>m',
+      '<cmd>MCunderCursor<cr>', desc = 'Create a selection for selected text or word under the cursor',
+      },
     },
   },
 

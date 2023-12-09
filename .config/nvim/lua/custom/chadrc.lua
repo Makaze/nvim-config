@@ -5,17 +5,26 @@ local M = {}
 local highlights = require "custom.highlights"
 
 M.ui = {
-    theme = "gruvchad",
-    theme_toggle = { "gruvchad", "github_light" },
+    theme = "gruvbox",
+    theme_toggle = { "gruvbox", "everforest" },
     statusline = {
-      -- default/round/block/arrow separators work only for default statusline theme
-      -- round and block will work for minimal theme only
-      separator_style = "default",
+        -- default/round/block/arrow separators work only for default statusline theme
+        -- round and block will work for minimal theme only
+        separator_style = "default",
     },
 
     hl_override = highlights.override,
     hl_add = highlights.add,
 
+    tabufline = {
+        enabled = (function()
+            if vim.g.vscode then
+                return false
+            else
+                return true
+            end
+        end)(),
+    },
     -- transparency = true,
 
     -- nvdash (dashboard)
