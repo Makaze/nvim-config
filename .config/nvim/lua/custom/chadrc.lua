@@ -5,8 +5,8 @@ local M = {}
 local highlights = require "custom.highlights"
 
 M.ui = {
-    theme = "chocolate",
-    theme_toggle = { "chocolate", "everforest" },
+    theme = "gruvbox",
+    theme_toggle = { "gruvbox", "everforest" },
     statusline = {
         -- default/round/block/arrow separators work only for default statusline theme
         -- round and block will work for minimal theme only

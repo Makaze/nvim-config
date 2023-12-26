@@ -204,6 +204,14 @@ local default_plugins = {
     config = function()
       require "plugins.configs.lspconfig"
     end,
+    dependencies = {
+      "SmiteshP/nvim-navbuddy",
+      dependencies = {
+          "SmiteshP/nvim-navic",
+          "MunifTanjim/nui.nvim"
+      },
+      opts = { lsp = { auto_attach = true } }
+    }
   },
 
   -- load luasnips + cmp related in insert mode only
