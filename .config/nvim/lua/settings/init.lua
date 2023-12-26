@@ -34,6 +34,8 @@ set.foldlevel = 20
 set.foldmethod = "expr"
 set.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.fillchars = [[eob:~,fold:+,foldopen:,foldsep:|,foldclose:]]
+set.listchars = "space:·,tab:->\\"
+set.list = true
 
 vim.cmd([[
     " inoremap <Left>  <NOP>
@@ -67,7 +69,6 @@ vim.cmd([[
     nnoremap <C-y>   <C-r>
     xnoremap <C-y>   <C-r>
     inoremap <C-y>   <C-o><C-r>
-    
 ]])
 
 if vim.g.vscode then

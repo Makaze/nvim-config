@@ -4,7 +4,7 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 local lspconfig = require "lspconfig"
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "tsserver", "clangd" }
+local servers = { "html", "cssls", "tsserver", "clangd", "gopls", "jedi_language_server"}
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -15,3 +15,4 @@ end
 
 -- 
 -- lspconfig.pyright.setup { blabla}
+-- lspconfig.jedi-language-server.setup{}

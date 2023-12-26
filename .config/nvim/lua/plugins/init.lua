@@ -88,10 +88,59 @@ local default_plugins = {
   },
 
   {
-    'nvim-treesitter/nvim-treesitter-context',
+    "nvim-treesitter/nvim-treesitter-context",
     config = true,
     event = "VeryLazy",
   },
+
+  {
+    'smoka7/hop.nvim',
+    config = true,
+    event = "VeryLazy",
+    keys = {
+      {
+        mode = { "v", "n" },
+        "<Leader>hw",
+        "<cmd>HopWord<cr>",
+        desc = "Hop to a word on the screen",
+      },
+      {
+        mode = { "v", "n" },
+        "<Leader>ha",
+        "<cmd>HopAnywhere<cr>",
+        desc = "Hop anywhere on the screen",
+      },
+      {
+        mode = { "v", "n" },
+        "<Leader>hl",
+        "<cmd>HopLine<cr>",
+        desc = "Hop to a line on the screen",
+      },
+      {
+        mode = { "v", "n" },
+        "<Leader>hp",
+        "<cmd>HopPattern<cr>",
+        desc = "Hop to a pattern on the screen",
+      },
+
+    },
+  },
+
+  {
+    'rmagatti/goto-preview',
+    config = true,
+    opts = {
+      default_mappings = true,
+    },
+    event = "VeryLazy",
+  },
+
+  -- -- VSCode theme
+  -- {
+  --   "Mofiqul/vscode.nvim",
+  --   config = false,
+  --   event = "VeryLazy",
+  -- },
 
   -- {
   --   'SmiteshP/nvim-navic',
@@ -346,7 +395,7 @@ local default_plugins = {
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
     event = "VeryLazy",
     config = function(_, opts)
-      require("telescope").load_extension("file_browser")
+      require("telescope").load_extension "file_browser"
       vim.keymap.set("n", "<leader>fb", "<cmd>Telescope file_browser<cr>")
     end,
   },
@@ -356,7 +405,7 @@ local default_plugins = {
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
     event = "VeryLazy",
     config = function(_, opts)
-      require("telescope").load_extension("zoxide")
+      require("telescope").load_extension "zoxide"
       vim.keymap.set("n", "<leader>cd", "<cmd>Telescope zoxide list<cr>")
     end,
   },
@@ -366,8 +415,8 @@ local default_plugins = {
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
     event = "VeryLazy",
     config = function(_, opts)
-      require('neoclip').setup({
-        default_register = '+',
+      require("neoclip").setup {
+        default_register = "+",
         on_select = {
           set_reg = true,
           move_to_front = true,
@@ -378,20 +427,20 @@ local default_plugins = {
           move_to_front = true,
           close_telescope = true,
         },
-      })
-      require("telescope").load_extension("neoclip")
+      }
+      require("telescope").load_extension "neoclip"
       vim.keymap.set("n", "<leader>fc", "<cmd>Telescope neoclip<cr>")
     end,
   },
 
   {
-    'rmagatti/auto-session',
+    "rmagatti/auto-session",
     config = true,
     lazy = false,
   },
 
   {
-    'Bekaboo/dropbar.nvim',
+    "Bekaboo/dropbar.nvim",
     config = true,
     event = "VeryLazy",
   },
@@ -399,11 +448,11 @@ local default_plugins = {
   {
     "NeogitOrg/neogit",
     dependencies = {
-      "nvim-lua/plenary.nvim",         -- required
+      "nvim-lua/plenary.nvim", -- required
       "nvim-telescope/telescope.nvim", -- optional
-      "sindrets/diffview.nvim",        -- optional
+      "sindrets/diffview.nvim", -- optional
     },
-    config = true
+    config = true,
   },
 
   {
@@ -416,24 +465,29 @@ local default_plugins = {
   },
 
   {
-    'tpope/vim-unimpaired',
-    config=false,
-    lazy=false,
+    "tpope/vim-unimpaired",
+    config = false,
+    lazy = false,
   },
   {
-    'tpope/vim-obsession',
-    config=false,
-    lazy=false,
+    "tpope/vim-obsession",
+    config = false,
+    lazy = false,
   },
   {
-    'tpope/vim-fugitive',
-    config=false,
-    lazy=false,
+    "tpope/vim-fugitive",
+    config = false,
+    lazy = false,
   },
   {
-    'tpope/vim-surround',
-    config=false,
-    lazy=false,
+    "tpope/vim-surround",
+    config = false,
+    lazy = false,
+  },
+  {
+    "tpope/vim-commentary",
+    config = false,
+    lazy = false,
   },
 
   -- {
@@ -456,73 +510,73 @@ local default_plugins = {
   -- },
 
   {
-    'honza/vim-snippets',
-    config=false,
-    lazy=false,
+    "honza/vim-snippets",
+    config = false,
+    lazy = false,
   },
 
   {
-    'ojroques/nvim-osc52',
+    "ojroques/nvim-osc52",
     config = function(_, opts)
       require("osc52").setup()
-      vim.keymap.set('n', '<leader>c', require('osc52').copy_operator, {expr = true})
-      vim.keymap.set('n', '<leader>cc', '<leader>c_', {remap = true})
-      vim.keymap.set('v', '<leader>c', require('osc52').copy_visual)
+      vim.keymap.set("n", "<leader>c", require("osc52").copy_operator, { expr = true })
+      vim.keymap.set("n", "<leader>cc", "<leader>c_", { remap = true })
+      vim.keymap.set("v", "<leader>c", require("osc52").copy_visual)
     end,
     lazy = false,
   },
 
   {
-    'ibhagwan/smartyank.nvim',
+    "ibhagwan/smartyank.nvim",
     config = function(_, opts)
-      require('smartyank').setup {
+      require("smartyank").setup {
         highlight = {
-          enabled = true,         -- highlight yanked text
-          higroup = "IncSearch",  -- highlight group of yanked text
-          timeout = 2000,         -- timeout for clearing the highlight
+          enabled = true, -- highlight yanked text
+          higroup = "IncSearch", -- highlight group of yanked text
+          timeout = 2000, -- timeout for clearing the highlight
         },
         clipboard = {
-          enabled = true
+          enabled = true,
         },
         tmux = {
           enabled = true,
           -- remove `-w` to disable copy to host client's clipboard
-          cmd = { 'tmux', 'set-buffer', '-w' }
+          cmd = { "tmux", "set-buffer", "-w" },
         },
         osc52 = {
           enabled = true,
           -- escseq = 'tmux',     -- use tmux escape sequence, only enable if
-                                  -- you're using tmux and have issues (see #4)
-          ssh_only = false,       -- false to OSC52 yank also in local sessions
-          silent = false,         -- true to disable the "n chars copied" echo
-          echo_hl = "Directory",  -- highlight group of the OSC52 echo message
+          -- you're using tmux and have issues (see #4)
+          ssh_only = false, -- false to OSC52 yank also in local sessions
+          silent = false, -- true to disable the "n chars copied" echo
+          echo_hl = "Directory", -- highlight group of the OSC52 echo message
         },
         -- By default copy is only triggered by "intentional yanks" where the
         -- user initiated a `y` motion (e.g. `yy`, `yiw`, etc). Set to `false`
         -- if you wish to copy indiscriminately:
         -- validate_yank = false,
-        -- 
+        --
         -- For advanced customization set to a lua function returning a boolean
         -- for example, the default condition is:
         -- validate_yank = function() return vim.v.operator == "y" end,
       }
     end,
-    event = "VeryLazy"
+    event = "VeryLazy",
   },
 
   {
-    'tzachar/highlight-undo.nvim',
+    "tzachar/highlight-undo.nvim",
     config = true,
     event = "VeryLazy",
   },
 
   {
-    'ojroques/nvim-bufdel',
+    "ojroques/nvim-bufdel",
     config = true,
     lazy = false,
   },
 
-  { 'echasnovski/mini.files', version = false, config = true, },
+  { "echasnovski/mini.files", version = false, config = true },
 
   {
     "folke/flash.nvim",
@@ -553,14 +607,17 @@ local default_plugins = {
     "smoka7/multicursors.nvim",
     event = "VeryLazy",
     dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'smoka7/hydra.nvim',
+      "nvim-treesitter/nvim-treesitter",
+      "smoka7/hydra.nvim",
     },
     opts = {},
-    cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
+    cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
     keys = {
-      { mode = { 'v', 'n' }, '<Leader>m',
-      '<cmd>MCunderCursor<cr>', desc = 'Create a selection for selected text or word under the cursor',
+      {
+        mode = { "v", "n" },
+        "<Leader>m",
+        "<cmd>MCunderCursor<cr>",
+        desc = "Create a selection for selected text or word under the cursor",
       },
     },
   },
@@ -568,24 +625,24 @@ local default_plugins = {
   {
     "simrat39/symbols-outline.nvim",
     config = true,
-    cmd = { 'SymbolsOutline' },
+    cmd = { "SymbolsOutline" },
   },
 
   {
-    'rcarriga/nvim-notify',
+    "rcarriga/nvim-notify",
     config = function(_, opts)
-      vim.notify = require("notify")
+      vim.notify = require "notify"
     end,
     event = "VeryLazy",
   },
 
   {
-    'debugloop/telescope-undo.nvim',
+    "debugloop/telescope-undo.nvim",
     dependencies = {
-      'nvim-telescope/telescope.nvim',
+      "nvim-telescope/telescope.nvim",
     },
     config = function(_, opts)
-      require("telescope").load_extension("undo")
+      require("telescope").load_extension "undo"
     end,
     keys = { "<leader>" },
     cmd = { "Telescope undo" },
@@ -602,7 +659,7 @@ local default_plugins = {
     "folke/which-key.nvim",
     keys = { "<leader>", '"', "'", "`", "c", "v", "g", "[", "]", "z" },
     -- init = function()
-      -- require("core.utils").load_mappings "whichkey"
+    -- require("core.utils").load_mappings "whichkey"
     -- end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "whichkey")
